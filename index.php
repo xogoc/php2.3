@@ -37,11 +37,9 @@ if($_FILES['img']) {
 $select = $mysqli->query("SELECT * FROM gallery ORDER BY views DESC");
 
 $thumbnails = array();
-for ($i=0;$i<$select->num_rows;$i++) {
-    $img = $select->fetch_assoc();
-    $thumbnails[$i]['id'] = $img['id'];
-    $thumbnails[$i]['name'] = $img['name'];
-    $thumbnails[$i]['views'] = $img['views'];
+
+while ($img = $select->fetch_assoc()) {
+    $thumbnails[] = $img;
 }
 
 echo $template->render([
